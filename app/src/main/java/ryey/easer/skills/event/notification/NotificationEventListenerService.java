@@ -93,16 +93,12 @@ public class NotificationEventListenerService extends NotificationListenerServic
                 return false;
         }
         Bundle extras = sbn.getNotification().extras;
-        CharSequence title_c = extras.getCharSequence(Notification.EXTRA_TITLE); 
-        String title = null; 
-        if(title_c != null) { 
-            title = title_c.toString(); 
-        } 
-        CharSequence contentText_c = extras.getCharSequence(Notification.EXTRA_TEXT); 
-        String contentText = null; 
-        if(contentText_c != null) { 
-            contentText = contentText_c.toString(); 
-        }
+        String title = extras.getCharSequence(Notification.EXTRA_TITLE) != null
+                ? extras.getCharSequence(Notification.EXTRA_TITLE).toString()
+                : null;
+        String contentText = extras.getCharSequence(Notification.EXTRA_TEXT) != null
+                ? extras.getCharSequence(Notification.EXTRA_TEXT).toString()
+                : null;
         if (t_title != null) {
             if (title == null || !title.contains(t_title))
                 return false;
@@ -123,16 +119,12 @@ public class NotificationEventListenerService extends NotificationListenerServic
                     : NotificationSlot.NotifyIntentPrototype.obtainNegativeIntent(compoundData.uri);
             intent.putExtra(NotificationEventData.AppDynamics.id, sbn.getPackageName());
             Bundle extras = sbn.getNotification().extras;
-            CharSequence title_c = extras.getCharSequence(Notification.EXTRA_TITLE);
-            String title = null; 
-            if(title_c != null) { 
-                title = title_c.toString(); 
-            } 
-            CharSequence contentText_c = extras.getCharSequence(Notification.EXTRA_TEXT); 
-            String contentText = null; 
-            if(contentText_c != null) { 
-                contentText = contentText_c.toString(); 
-            } 
+            String title = extras.getCharSequence(Notification.EXTRA_TITLE) != null
+                    ? extras.getCharSequence(Notification.EXTRA_TITLE).toString()
+                    : null;
+            String contentText = extras.getCharSequence(Notification.EXTRA_TEXT) != null
+                    ? extras.getCharSequence(Notification.EXTRA_TEXT).toString()
+                    : null;
             intent.putExtra(NotificationEventData.TitleDynamics.id, title);
             intent.putExtra(NotificationEventData.ContentDynamics.id, contentText);
             sendBroadcast(intent);
